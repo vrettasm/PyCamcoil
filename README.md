@@ -94,7 +94,7 @@ df_coil = r_coil("APKAPADGL")
 # Display the random coil values.
 print(df_coil)
 
-RES 	CA 	        CB 	        C 	        H 	        HA 	        N
+    RES       CA          CB            C         H          HA             N
 0 	A 	51.41214 	19.07014 	176.52162 	8.24460 	4.47156 	125.51232
 1 	P 	62.60744 	31.82580 	177.00832 	NaN     	4.43674 	137.18000
 2 	K 	56.14292 	32.88032 	176.38484 	8.31074 	4.36828 	122.10046
