@@ -15,7 +15,7 @@ M. Vrettas, PhD.
 There are two options to install the software.
 
 1. The easiest way is to visit the GitHub web-page of the project and
-[download the code](https://github.com/vrettasm/PyCamcoil/archive/ref/heads/master.zip)
+[download the code](https://github.com/vrettasm/PyCamcoil/archive/master.zip)
 in zip format. This option does not require a prior installation of git on the
 computer.
 
