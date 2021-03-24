@@ -83,7 +83,7 @@ by importing the main module as:
 
 ```
 # Import the main module.
-from src.camcoil import CamCoil
+from src.camcoil_engine import CamCoil
 
 # Create an object.
 r_coil = CamCoil()
