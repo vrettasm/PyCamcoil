@@ -28,7 +28,7 @@ computer.
 The recommended version is **Python 3.6+**. Some required packages are:
 
 >
-> Numpy, Pandas
+> numpy, pathlib, pandas
 >
 
 ## How to run
