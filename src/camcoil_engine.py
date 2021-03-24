@@ -92,7 +92,7 @@ class CamCoil(object):
                                           delim_whitespace=" ",
                                           names=["RES", "ATOM", "CS", "UNKNOWN"])
             # This is to optimize search.
-            self.df[f_name] = self.df[f_name].set_index(["RES", "ATOM"])
+            self.df[f_name].set_index(["RES", "ATOM"], inplace=True)
         # _end-if_
 
     # _end_def_
@@ -221,14 +221,14 @@ class CamCoil(object):
                     # _end_if_
 
                     # Backwards link with the i-th residue.
-                    b_link_a = seq[j] + res_i
+                    search_link = (seq[j] + res_i, atom)
 
                     if j == i - 1:
                         # Get the weight value.
                         alpha = getattr(weights["-1"], atom)
 
                         # Get the correction value from the dataframe.
-                        corr_val = self.df["corr_1L"].loc[(b_link_a, atom), "CS"]
+                        corr_val = self.df["corr_1L"].loc[search_link, "CS"]
 
                         # Add the weighted correction.
                         cs_i[atom] += float(alpha * corr_val)
@@ -237,7 +237,7 @@ class CamCoil(object):
                         alpha = getattr(weights["-2"], atom)
 
                         # Get the correction value from the dataframe.
-                        corr_val = self.df["corr_2L"].loc[(b_link_a, atom), "CS"]
+                        corr_val = self.df["corr_2L"].loc[search_link, "CS"]
 
                         # Add the weighted correction.
                         cs_i[atom] += float(alpha * corr_val)
@@ -254,14 +254,14 @@ class CamCoil(object):
                     # _end_if_
 
                     # Forward link with the i-th residue.
-                    a_link_b = res_i + seq[k]
+                    search_link = (res_i + seq[k], atom)
 
                     if k == i + 1:
                         # Get the weight value.
                         alpha = getattr(weights["+1"], atom)
 
                         # Get the correction value from the dataframe.
-                        corr_val = self.df["corr_1R"].loc[(a_link_b, atom), "CS"]
+                        corr_val = self.df["corr_1R"].loc[search_link, "CS"]
 
                         # Add the weighted correction.
                         cs_i[atom] += float(alpha * corr_val)
@@ -270,7 +270,7 @@ class CamCoil(object):
                         alpha = getattr(weights["+2"], atom)
 
                         # Get the correction value from the dataframe.
-                        corr_val = self.df["corr_2R"].loc[(a_link_b, atom), "CS"]
+                        corr_val = self.df["corr_2R"].loc[search_link, "CS"]
 
                         # Add the weighted correction.
                         cs_i[atom] += float(alpha * corr_val)
