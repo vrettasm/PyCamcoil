@@ -90,7 +90,8 @@ by importing the main module as:
     # Use it to get a dataframe.
     df_coil = r_coil("APKAPADGL")
 
-If main module averages around '0.5' sec per '100' residue amino-acid chain:
+The main module (when is called directly inside a python environment as
+above) averages around '0.5' sec per '100' residue amino-acid chain:
 
     %timeit r_coil("APKAPADGLKMEATKQHNAPVVAPKAPADGLKMEATKQHPVVAPKAPADG
                    "LKMEATKQHPAPKAPADGLKMEATKQHNAPVVAPKAPADGLKMEATKQOH")
