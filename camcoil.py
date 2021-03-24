@@ -19,7 +19,7 @@ def main(sequence=None, pH=None, f_out=None):
 
     :param pH: (float)  determines the specific
     random coil (reference) values that will be
-    used to generate the prediciotns.
+    used to generate the predictions.
 
     :param f_out: (path) if given, the output
     will be saved there instead of the screen.

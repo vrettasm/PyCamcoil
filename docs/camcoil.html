@@ -29,7 +29,6 @@
 <pre><code class="python">#!/usr/bin/env python3
 
 import sys
-import pandas as pd
 from pathlib import Path
 from src.camcoil_engine import CamCoil
 
@@ -48,7 +47,7 @@ def main(sequence=None, pH=None, f_out=None):
 
     :param pH: (float)  determines the specific
     random coil (reference) values that will be
-    used to generate the prediciotns.
+    used to generate the predictions.
 
     :param f_out: (path) if given, the output
     will be saved there instead of the screen.
@@ -97,9 +96,10 @@ if __name__ == &#34;__main__&#34;:
         import argparse
 
         # Create a parser object
-        parser = argparse.ArgumentParser(description=&#34; PyCamcoil (v0.1):  &#34;
-        &#34;Generates random coil chemical shift values that are obtained by &#34;
-        &#34;analyzing the amino acid sequences in the loop regions.&#34;)
+        parser = argparse.ArgumentParser(description=&#34;PyCamcoil (v0.1): &#34;
+                                                     &#34;Generates random coil chemical shift values &#34;
+                                                     &#34;that are obtained by analyzing the amino acid&#34;
+                                                     &#34;sequences in the loop regions.&#34;)
 
         # Input sequence of amino-acids (one-letter-code).
         parser.add_argument(&#34;-s&#34;, &#34;--seq&#34;, type=str, required=True,
@@ -146,7 +146,7 @@ to initiate the camcoil_engine prediction.</p>
 <p>:param pH: (float)
 determines the specific
 random coil (reference) values that will be
-used to generate the prediciotns.</p>
+used to generate the predictions.</p>
 <p>:param f_out: (path) if given, the output
 will be saved there instead of the screen.</p>
 <p>:return: None.</p></div>
@@ -163,7 +163,7 @@ will be saved there instead of the screen.</p>
 
     :param pH: (float)  determines the specific
     random coil (reference) values that will be
-    used to generate the prediciotns.
+    used to generate the predictions.
 
     :param f_out: (path) if given, the output
     will be saved there instead of the screen.
