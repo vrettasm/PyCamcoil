@@ -89,4 +89,5 @@ The work is described in detail at:
 ### Contact
 ---
 
-For any questions / comments please contact me at: vrettasm@gmail.com
+For any questions/comments (*regarding the code*) please contact me at:
+vrettasm@gmail.com
