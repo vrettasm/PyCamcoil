@@ -67,7 +67,7 @@ if __name__ == "__main__":
         # Local import.
         import argparse
 
-        # Create a parser object
+        # Create a parser object.
         parser = argparse.ArgumentParser(description="PyCamcoil (v0.1): "
                                                      "Generates random coil chemical shift values "
                                                      "that are obtained by analyzing the amino acid"
@@ -77,13 +77,12 @@ if __name__ == "__main__":
         parser.add_argument("-s", "--seq", type=str, required=True,
                             help="Input sequence (string) of amino-acids "
                                  "(REQUIRED)")
-
-        # Input file with simulation data.
+        # Input pH value.
         parser.add_argument("--pH", type=float, default=7.0,
                             help="pH value of reference chemical shifts "
                                  "[default=7.0]")
 
-        # Input file with simulation parameters.
+        # Output path to save the random coil chemical shifts.
         parser.add_argument("--out", type=str, default=None,
                             help="Output 'path' to save the predicted values. "
                                  "The default file name is 'random_coil.csv' ")
@@ -93,8 +92,8 @@ if __name__ == "__main__":
 
         # Call the main function.
         main(args.seq, args.pH, args.out)
-
     else:
+        # Display error message.
         sys.exit("Error: Not enough input parameters.")
     # _end_if_
 
