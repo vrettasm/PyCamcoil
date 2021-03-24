@@ -61,7 +61,7 @@ SEQUENCE PROCESSED (pH=6.1):
 11   Q  55.71748  29.58952  176.10200  8.20326  4.35074  120.44640
 ```
 
-To see the help type:
+To see the full help information, type:
 
     $ python3 camcoil.py --help
 
