@@ -75,6 +75,27 @@ is equivalent to:
 
     2. $ python3 camcoil.py -s TESTAMINOSEQ
 
+## Performance
+---
+
+The code can also be called independently in any other Python programs
+by importing the main module as:
+
+    # Import the main module.
+    from src.camcoil import CamCoil
+
+    # Create an object.
+    r_coil = CamCoil()
+
+    # Use it to get a dataframe.
+    df_coil = r_coil("APKAPADGL")
+
+If main module averages around '0.5' sec per '100' residue amino-acid chain:
+
+    %timeit r_coil("APKAPADGLKMEATKQHNAPVVAPKAPADGLKMEATKQHPVVAPKAPADG
+                   "LKMEATKQHPAPKAPADGLKMEATKQHNAPVVAPKAPADGLKMEATKQOH")
+    505 ms ± 35.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+
 ## References
 ---
 
