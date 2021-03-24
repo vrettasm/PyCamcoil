@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-import pandas as pd
 from pathlib import Path
 from src.camcoil_engine import CamCoil
 
@@ -69,9 +68,10 @@ if __name__ == "__main__":
         import argparse
 
         # Create a parser object
-        parser = argparse.ArgumentParser(description=" PyCamcoil (v0.1):  "
-        "Generates random coil chemical shift values that are obtained by "
-        "analyzing the amino acid sequences in the loop regions.")
+        parser = argparse.ArgumentParser(description="PyCamcoil (v0.1): "
+                                                     "Generates random coil chemical shift values "
+                                                     "that are obtained by analyzing the amino acid"
+                                                     "sequences in the loop regions.")
 
         # Input sequence of amino-acids (one-letter-code).
         parser.add_argument("-s", "--seq", type=str, required=True,
