@@ -109,8 +109,9 @@ print(df_coil)
 The main module (when is called directly inside a python environment as
 above) averages around '0.5' sec per '100' residue amino-acid chain:
 
-    %timeit r_coil("APKAPADGLKMEATKQHNAPVVAPKAPADGLKMEATKQHPVVAPKAPADG
+    %timeit r_coil("APKAPADGLKMEATKQHNAPVVAPKAPADGLKMEATKQHPVVAPKAPADG"
                    "LKMEATKQHPAPKAPADGLKMEATKQHNAPVVAPKAPADGLKMEATKQOH")
+
     505 ms ± 35.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 
 ## References
