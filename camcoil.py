@@ -41,7 +41,7 @@ def main(sequence=None, pH=None, f_out=None):
         sys.exit(1)
     # _end_try_
 
-    # Check if we want to save the resutls.
+    # Check if we want to save the results.
     if f_out:
         # Make sure its a Path().
         f_path = Path(Path(f_out) / "random_coil.csv")
