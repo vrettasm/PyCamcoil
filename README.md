@@ -81,14 +81,30 @@ is equivalent to:
 The code can also be called independently in any other Python programs
 by importing the main module as:
 
-    # Import the main module.
-    from src.camcoil import CamCoil
+```
+# Import the main module.
+from src.camcoil import CamCoil
 
-    # Create an object.
-    r_coil = CamCoil()
+# Create an object.
+r_coil = CamCoil()
 
-    # Use it to get a dataframe.
-    df_coil = r_coil("APKAPADGL")
+# Use it to get a dataframe.
+df_coil = r_coil("APKAPADGL")
+
+# Display the random coil values.
+print(df_coil)
+
+RES 	CA 	        CB 	        C 	        H 	        HA 	        N
+0 	A 	51.41214 	19.07014 	176.52162 	8.24460 	4.47156 	125.51232
+1 	P 	62.60744 	31.82580 	177.00832 	NaN     	4.43674 	137.18000
+2 	K 	56.14292 	32.88032 	176.38484 	8.31074 	4.36828 	122.10046
+3 	A 	51.34046 	19.11406 	176.52994 	8.21902 	4.47378 	125.42938
+4 	P 	62.50610 	31.85898 	177.01894 	NaN     	4.44632 	137.18000
+5 	A 	52.64648 	19.28308 	177.36534 	8.28882 	4.33092 	124.59918
+6 	D 	54.28196 	41.20876 	176.66546 	8.28206 	4.61802 	119.64270
+7 	G 	45.88736 	NaN     	174.37640 	8.27726 	4.12000 	109.77946
+8 	L 	55.03396 	42.38164 	177.30200 	8.04950 	4.37060 	122.16668
+```
 
 The main module (when is called directly inside a python environment as
 above) averages around '0.5' sec per '100' residue amino-acid chain:
