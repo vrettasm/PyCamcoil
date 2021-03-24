@@ -87,9 +87,12 @@ class CamCoil(object):
                                         f"File {f_path} doesn't exist.")
             # _end_if_
 
-            # Add it to the dictionary.
-            self.df[f_name] = pd.read_csv(f_path, header=None,
-                                          delim_whitespace=" ",
+            # N.B.: We have to set the 'keep_default_na=False', because
+            # the combination of residues 'N' + 'A' is interpreted here
+            # by default as 'NaN', and that causes the indexing to fail
+            # in that search.
+            self.df[f_name] = pd.read_csv(f_path, header=None, delim_whitespace=" ",
+                                          keep_default_na=False,
                                           names=["RES", "ATOM", "CS", "UNKNOWN"])
             # This is to optimize search.
             self.df[f_name].set_index(["RES", "ATOM"], inplace=True)
