@@ -30,8 +30,8 @@ __pdoc__["ChemShifts.CB"] = "Random coil chemical shift value for 'CB'."
 __pdoc__["ChemShifts.HA"] = "Random coil chemical shift value for 'HA'."
 
 # Accepted residues (one-letter-code).
-ACCEPTED_RES_ONE = ['A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L',
-                    'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V', 'X', 'O']
+ACCEPTED_RES_ONE = {'A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L',
+                    'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V', 'X', 'O'}
 
 # Protein (amino-acid) 3-to-1 letters mappings.
 # The CYO --> X, CYR --> C.

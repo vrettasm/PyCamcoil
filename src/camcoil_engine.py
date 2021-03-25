@@ -199,6 +199,9 @@ class CamCoil(object):
         # Holds the output values.
         output = []
 
+        # Localize the append.
+        output_append = output.append
+
         # Compute the random coil values.
         for i, res_i in enumerate(seq, start=0):
 
@@ -283,8 +286,8 @@ class CamCoil(object):
 
             # _end_for_
 
-            # Append the results.
-            output.append(cs_i)
+            # Update the list.
+            output_append(cs_i)
         # _end_for_
 
         # Check the flag.
