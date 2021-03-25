@@ -20,7 +20,7 @@ NOTE:
 """
 
 from pathlib import Path
-import pandas as pd
+from pandas import read_csv, DataFrame
 
 from .camcoil_properties import (TARGET_ATOMS,
                                  pH2_prop, pH7_prop, weights)
@@ -91,9 +91,9 @@ class CamCoil(object):
             # the combination of residues 'N' + 'A' is interpreted here
             # by default as 'NaN', and that causes the indexing to fail
             # in that search.
-            self.df[f_name] = pd.read_csv(f_path, header=None, delim_whitespace=" ",
-                                          keep_default_na=False,
-                                          names=["RES", "ATOM", "CS", "UNKNOWN"])
+            self.df[f_name] = read_csv(f_path, header=None, delim_whitespace=" ",
+                                       keep_default_na=False,
+                                       names=["RES", "ATOM", "CS", "UNKNOWN"])
             # This is to optimize search.
             self.df[f_name].set_index(["RES", "ATOM"], inplace=True)
         # _end-if_
@@ -308,7 +308,7 @@ class CamCoil(object):
         # _end_if_
 
         # Return the output in dataframe.
-        return pd.DataFrame(data=output)
+        return DataFrame(data=output)
     # _end_def_
 
     # Auxiliary.
