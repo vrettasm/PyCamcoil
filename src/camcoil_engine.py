@@ -22,7 +22,7 @@ NOTE:
 from pathlib import Path
 from pandas import read_csv, DataFrame
 
-from .camcoil_properties import (TARGET_ATOMS,
+from .camcoil_properties import (TARGET_ATOMS, ACCEPTED_RES_ONE,
                                  pH2_prop, pH7_prop, weights)
 
 
@@ -190,7 +190,7 @@ class CamCoil(object):
         # Make a quick check for validity.
         for res in seq:
             # Valid residue check.
-            if res not in self._cs:
+            if res not in ACCEPTED_RES_ONE:
                 raise ValueError(f"{self.__class__.__name__}: "
                                  f" Invalid residue name : {res}")
             # _end_if_
