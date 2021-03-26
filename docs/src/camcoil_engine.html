@@ -66,9 +66,9 @@ NOTE:
 &#34;&#34;&#34;
 
 from pathlib import Path
-import pandas as pd
+from pandas import read_csv, DataFrame
 
-from .camcoil_properties import (TARGET_ATOMS,
+from .camcoil_properties import (TARGET_ATOMS, ACCEPTED_RES_ONE,
                                  pH2_prop, pH7_prop, weights)
 
 
@@ -137,9 +137,9 @@ class CamCoil(object):
             # the combination of residues &#39;N&#39; + &#39;A&#39; is interpreted here
             # by default as &#39;NaN&#39;, and that causes the indexing to fail
             # in that search.
-            self.df[f_name] = pd.read_csv(f_path, header=None, delim_whitespace=&#34; &#34;,
-                                          keep_default_na=False,
-                                          names=[&#34;RES&#34;, &#34;ATOM&#34;, &#34;CS&#34;, &#34;UNKNOWN&#34;])
+            self.df[f_name] = read_csv(f_path, header=None, delim_whitespace=&#34; &#34;,
+                                       keep_default_na=False,
+                                       names=[&#34;RES&#34;, &#34;ATOM&#34;, &#34;CS&#34;, &#34;UNKNOWN&#34;])
             # This is to optimize search.
             self.df[f_name].set_index([&#34;RES&#34;, &#34;ATOM&#34;], inplace=True)
         # _end-if_
@@ -236,7 +236,7 @@ class CamCoil(object):
         # Make a quick check for validity.
         for res in seq:
             # Valid residue check.
-            if res not in self._cs:
+            if res not in ACCEPTED_RES_ONE:
                 raise ValueError(f&#34;{self.__class__.__name__}: &#34;
                                  f&#34; Invalid residue name : {res}&#34;)
             # _end_if_
@@ -245,20 +245,23 @@ class CamCoil(object):
         # Holds the output values.
         output = []
 
+        # Localize the append.
+        output_append = output.append
+
         # Compute the random coil values.
         for i, res_i in enumerate(seq, start=0):
 
             # Create a new dictionary. This will
             # hold the chemical shift values for
             # all atoms of the &#34;i-th&#34; residue.
-            cs_i = {&#34;RES&#34;: res_i,
+            cs_i = {&#34;ID&#34;: int(i+1), &#34;RES&#34;: res_i,
                     &#34;CA&#34;: None, &#34;CB&#34;: None, &#34;C&#34;: None,
                     &#34;H&#34;: None, &#34;HA&#34;: None, &#34;N&#34;: None}
 
             # Predict the chemical shifts.
             for atom in TARGET_ATOMS:
 
-                # First get the reference chemical shift.
+                # First get the &#34;reference&#34; chemical shift.
                 cs_i[atom] = getattr(self._cs[res_i], atom)
 
                 # Get the (LOWER) neighbourhood contributions.
@@ -329,8 +332,8 @@ class CamCoil(object):
 
             # _end_for_
 
-            # Append the results.
-            output.append(cs_i)
+            # Update the list.
+            output_append(cs_i)
         # _end_for_
 
         # Check the flag.
@@ -354,7 +357,7 @@ class CamCoil(object):
         # _end_if_
 
         # Return the output in dataframe.
-        return pd.DataFrame(data=output)
+        return DataFrame(data=output)
     # _end_def_
 
     # Auxiliary.
@@ -473,9 +476,9 @@ set automatically to one of these two in the code.</p>
             # the combination of residues &#39;N&#39; + &#39;A&#39; is interpreted here
             # by default as &#39;NaN&#39;, and that causes the indexing to fail
             # in that search.
-            self.df[f_name] = pd.read_csv(f_path, header=None, delim_whitespace=&#34; &#34;,
-                                          keep_default_na=False,
-                                          names=[&#34;RES&#34;, &#34;ATOM&#34;, &#34;CS&#34;, &#34;UNKNOWN&#34;])
+            self.df[f_name] = read_csv(f_path, header=None, delim_whitespace=&#34; &#34;,
+                                       keep_default_na=False,
+                                       names=[&#34;RES&#34;, &#34;ATOM&#34;, &#34;CS&#34;, &#34;UNKNOWN&#34;])
             # This is to optimize search.
             self.df[f_name].set_index([&#34;RES&#34;, &#34;ATOM&#34;], inplace=True)
         # _end-if_
@@ -572,7 +575,7 @@ set automatically to one of these two in the code.</p>
         # Make a quick check for validity.
         for res in seq:
             # Valid residue check.
-            if res not in self._cs:
+            if res not in ACCEPTED_RES_ONE:
                 raise ValueError(f&#34;{self.__class__.__name__}: &#34;
                                  f&#34; Invalid residue name : {res}&#34;)
             # _end_if_
@@ -581,20 +584,23 @@ set automatically to one of these two in the code.</p>
         # Holds the output values.
         output = []
 
+        # Localize the append.
+        output_append = output.append
+
         # Compute the random coil values.
         for i, res_i in enumerate(seq, start=0):
 
             # Create a new dictionary. This will
             # hold the chemical shift values for
             # all atoms of the &#34;i-th&#34; residue.
-            cs_i = {&#34;RES&#34;: res_i,
+            cs_i = {&#34;ID&#34;: int(i+1), &#34;RES&#34;: res_i,
                     &#34;CA&#34;: None, &#34;CB&#34;: None, &#34;C&#34;: None,
                     &#34;H&#34;: None, &#34;HA&#34;: None, &#34;N&#34;: None}
 
             # Predict the chemical shifts.
             for atom in TARGET_ATOMS:
 
-                # First get the reference chemical shift.
+                # First get the &#34;reference&#34; chemical shift.
                 cs_i[atom] = getattr(self._cs[res_i], atom)
 
                 # Get the (LOWER) neighbourhood contributions.
@@ -665,8 +671,8 @@ set automatically to one of these two in the code.</p>
 
             # _end_for_
 
-            # Append the results.
-            output.append(cs_i)
+            # Update the list.
+            output_append(cs_i)
         # _end_for_
 
         # Check the flag.
@@ -690,7 +696,7 @@ set automatically to one of these two in the code.</p>
         # _end_if_
 
         # Return the output in dataframe.
-        return pd.DataFrame(data=output)
+        return DataFrame(data=output)
     # _end_def_
 
     # Auxiliary.
@@ -796,7 +802,7 @@ it will print more information on the screen.</p>
     # Make a quick check for validity.
     for res in seq:
         # Valid residue check.
-        if res not in self._cs:
+        if res not in ACCEPTED_RES_ONE:
             raise ValueError(f&#34;{self.__class__.__name__}: &#34;
                              f&#34; Invalid residue name : {res}&#34;)
         # _end_if_
@@ -805,20 +811,23 @@ it will print more information on the screen.</p>
     # Holds the output values.
     output = []
 
+    # Localize the append.
+    output_append = output.append
+
     # Compute the random coil values.
     for i, res_i in enumerate(seq, start=0):
 
         # Create a new dictionary. This will
         # hold the chemical shift values for
         # all atoms of the &#34;i-th&#34; residue.
-        cs_i = {&#34;RES&#34;: res_i,
+        cs_i = {&#34;ID&#34;: int(i+1), &#34;RES&#34;: res_i,
                 &#34;CA&#34;: None, &#34;CB&#34;: None, &#34;C&#34;: None,
                 &#34;H&#34;: None, &#34;HA&#34;: None, &#34;N&#34;: None}
 
         # Predict the chemical shifts.
         for atom in TARGET_ATOMS:
 
-            # First get the reference chemical shift.
+            # First get the &#34;reference&#34; chemical shift.
             cs_i[atom] = getattr(self._cs[res_i], atom)
 
             # Get the (LOWER) neighbourhood contributions.
@@ -889,8 +898,8 @@ it will print more information on the screen.</p>
 
         # _end_for_
 
-        # Append the results.
-        output.append(cs_i)
+        # Update the list.
+        output_append(cs_i)
     # _end_for_
 
     # Check the flag.
@@ -914,7 +923,7 @@ it will print more information on the screen.</p>
     # _end_if_
 
     # Return the output in dataframe.
-    return pd.DataFrame(data=output)</code></pre>
+    return DataFrame(data=output)</code></pre>
 </details>
 </dd>
 </dl>
