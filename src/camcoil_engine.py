@@ -208,14 +208,14 @@ class CamCoil(object):
             # Create a new dictionary. This will
             # hold the chemical shift values for
             # all atoms of the "i-th" residue.
-            cs_i = {"RES": res_i,
+            cs_i = {"ID": int(i+1), "RES": res_i,
                     "CA": None, "CB": None, "C": None,
                     "H": None, "HA": None, "N": None}
 
             # Predict the chemical shifts.
             for atom in TARGET_ATOMS:
 
-                # First get the reference chemical shift.
+                # First get the "reference" chemical shift.
                 cs_i[atom] = getattr(self._cs[res_i], atom)
 
                 # Get the (LOWER) neighbourhood contributions.
