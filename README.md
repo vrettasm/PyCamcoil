@@ -37,7 +37,7 @@ The recommended version is **Python 3.6+**. Some required packages are:
 To execute the program, first navigate to the main directory of the project
 (i.e. where the camcoil.py is located), and then run the following command:
 
-    $ ./python3 camcoil.py -s TESTAMINOSEQ
+    $ ./camcoil.py -s TESTAMINOSEQ
 
 The output should be:
 
@@ -63,17 +63,17 @@ SEQUENCE PROCESSED (pH=6.1):
 
 To see the full help information, type:
 
-    $ ./python3 camcoil.py --help
+    $ ./camcoil.py --help
 
 **Note:**
 The input sequence can be given with and without double-quotes.
 Example:
 
-    1. $ ./python3 camcoil.py -s "TESTAMINOSEQ"
+    1. $ ./camcoil.py -s "TESTAMINOSEQ"
 
 is equivalent to:
 
-    2. $ ./python3 camcoil.py -s TESTAMINOSEQ
+    2. $ ./camcoil.py -s TESTAMINOSEQ
 
 ## Performance
 ---
