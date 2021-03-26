@@ -14,10 +14,11 @@ from collections import namedtuple
 # Add documentation to the NamedTuple.
 __pdoc__ = {}
 
-# These are the "target" atoms that are predicted.
-TARGET_ATOMS = ['N', 'C', 'CA', 'CB', 'H', 'HA']
+# These are the target atoms that are predicted.
+TARGET_ATOMS = ('N', 'C', 'CA', 'CB', 'H', 'HA')
 
-# Module level declaration,
+# Module level declaration.
+# Make sure the order of the fields DOES NOT CHANGE!
 ChemShifts = namedtuple("ChemShifts", TARGET_ATOMS)
 
 # Add documentation for the fields.
