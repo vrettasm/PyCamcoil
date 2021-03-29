@@ -78,7 +78,7 @@ is equivalent to:
 ## Performance
 ---
 
-The code can also be called independently in any other Python programs
+The code can also be called independently in any other Python program
 by importing the main module as:
 
 ```
