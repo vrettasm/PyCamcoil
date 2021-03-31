@@ -98,16 +98,16 @@ pH7_prop = {"A": ChemShifts(125.387, 177.505, 52.475, 19.374, 8.2680, 4.371),
 
 # Weight factors for the pairwise correction terms.
 # N.B.: There are discrepancies compared to the SI.
-weights = {"-2": ChemShifts(0.10, 0.00, 0.04, 0.08, 0.10, 0.06),
-           "-1": ChemShifts(0.74, 0.00, 0.20, 0.20, 0.18, 0.28),
-           "+1": ChemShifts(0.14, 0.60, 0.52, 0.38, 0.18, 0.28),
-           "+2": ChemShifts(0.12, 0.26, 0.10, 0.10, 0.04, 0.02)}
+weights = {"L2": ChemShifts(0.10, 0.00, 0.04, 0.08, 0.10, 0.06),
+           "L1": ChemShifts(0.74, 0.00, 0.20, 0.20, 0.18, 0.28),
+           "R1": ChemShifts(0.14, 0.60, 0.52, 0.38, 0.18, 0.28),
+           "R2": ChemShifts(0.12, 0.26, 0.10, 0.10, 0.04, 0.02)}
 
 # Weight factors for the pairwise correction terms (LFP).
 # (LFP == Loops of Folded Proteins).
-weights_LFP = {"-2": ChemShifts(0.54, 0.28, 0.64, 0.54, 0.06, 0.32),
-               "-1": ChemShifts(0.66, 0.32, 0.78, 0.88, 0.16, 0.40),
-               "+1": ChemShifts(0.58, 0.38, 0.92, 0.88, 0.16, 0.44),
-               "+2": ChemShifts(0.42, 0.28, 0.74, 0.58, 0.08, 0.26)}
+weights_LFP = {"L2": ChemShifts(0.54, 0.28, 0.64, 0.54, 0.06, 0.32),
+               "L1": ChemShifts(0.66, 0.32, 0.78, 0.88, 0.16, 0.40),
+               "R1": ChemShifts(0.58, 0.38, 0.92, 0.88, 0.16, 0.44),
+               "R2": ChemShifts(0.42, 0.28, 0.74, 0.58, 0.08, 0.26)}
 
 # _end_module_

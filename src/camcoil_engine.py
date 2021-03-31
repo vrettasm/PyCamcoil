@@ -79,7 +79,7 @@ class CamCoil(object):
         parent_dir = Path(__file__).resolve().parent
 
         # Load the correction files.
-        for f_name in ["corr_1L", "corr_2L", "corr_1R", "corr_2R"]:
+        for f_name in ["corr_L1", "corr_L2", "corr_R1", "corr_R2"]:
 
             # Make sure the input file is Path.
             f_path = Path(parent_dir / str(f_name + ".txt"))
@@ -234,19 +234,19 @@ class CamCoil(object):
 
                     if j == i - 1:
                         # Get the weight value.
-                        alpha = getattr(weights["-1"], atom)
+                        alpha = getattr(weights["L1"], atom)
 
                         # Get the correction value from the dataframe.
-                        corr_val = self.df["corr_1L"].loc[search_link, "CS"]
+                        corr_val = self.df["corr_L1"].loc[search_link, "CS"]
 
                         # Add the weighted correction.
                         cs_i[atom] += float(alpha * corr_val)
                     else:
                         # Get the weight value.
-                        alpha = getattr(weights["-2"], atom)
+                        alpha = getattr(weights["L2"], atom)
 
                         # Get the correction value from the dataframe.
-                        corr_val = self.df["corr_2L"].loc[search_link, "CS"]
+                        corr_val = self.df["corr_L2"].loc[search_link, "CS"]
 
                         # Add the weighted correction.
                         cs_i[atom] += float(alpha * corr_val)
@@ -267,19 +267,19 @@ class CamCoil(object):
 
                     if k == i + 1:
                         # Get the weight value.
-                        alpha = getattr(weights["+1"], atom)
+                        alpha = getattr(weights["R1"], atom)
 
                         # Get the correction value from the dataframe.
-                        corr_val = self.df["corr_1R"].loc[search_link, "CS"]
+                        corr_val = self.df["corr_R1"].loc[search_link, "CS"]
 
                         # Add the weighted correction.
                         cs_i[atom] += float(alpha * corr_val)
                     else:
                         # Get the weight value.
-                        alpha = getattr(weights["+2"], atom)
+                        alpha = getattr(weights["R2"], atom)
 
                         # Get the correction value from the dataframe.
-                        corr_val = self.df["corr_2R"].loc[search_link, "CS"]
+                        corr_val = self.df["corr_R2"].loc[search_link, "CS"]
 
                         # Add the weighted correction.
                         cs_i[atom] += float(alpha * corr_val)
