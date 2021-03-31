@@ -12,7 +12,7 @@ The work is described in detail at:
     Chemical Society (JACS), 131 (45), 16332 - 16333.
 
 NOTE:
-    The txt files: 'corr_1L', 'corr_2L', 'corr_1R', 'corr_2R',
+    The txt files: 'corr_L1', 'corr_L2', 'corr_R1', 'corr_R2',
     are required for the estimation of the random coil values.
     They should be placed in the same directory with the module
     file. If they do not exist the code will exit with an error.
