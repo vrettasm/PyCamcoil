@@ -48,6 +48,9 @@ class CamCoil(object):
         :param pH: (float) the default pH value is set to 7.0.
         """
 
+        # Make sure the input is float.
+        pH = float(pH)
+
         # Check for the correct range.
         if (pH < 0.0) or (pH > 14.0):
             raise ValueError(f"{self.__class__.__name__}: "
@@ -96,7 +99,7 @@ class CamCoil(object):
                                        names=["RES", "ATOM", "CS", "UNKNOWN"])
             # This is to optimize search.
             self.df[f_name].set_index(["RES", "ATOM"], inplace=True)
-        # _end-if_
+        # _end_if_
 
     # _end_def_
 
