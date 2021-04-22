@@ -97,6 +97,7 @@ class CamCoil(object):
             self.df[f_name] = read_csv(f_path, header=None, delim_whitespace=" ",
                                        keep_default_na=False,
                                        names=["RES", "ATOM", "CS", "UNKNOWN"])
+
             # This is to optimize search.
             self.df[f_name].set_index(["RES", "ATOM"], inplace=True)
         # _end_if_
@@ -174,13 +175,6 @@ class CamCoil(object):
         # Make sure there are not empty spaces.
         seq = str(seq).strip()
 
-        # Sanity check.
-        if not seq.isalpha():
-            # It must contain only characters.
-            raise ValueError(f"{self.__class__.__name__}: "
-                             f" Input sequence is not valid: {seq}")
-        # _end_if_
-
         # Get the length of the sequence.
         seq_length = len(seq)
 
@@ -190,13 +184,15 @@ class CamCoil(object):
                              f" Sequence length is too long: {seq_length}")
         # _end_if_
 
-        # Make a quick check for validity.
+        # Make a quick check.
         for res in seq:
+
             # Valid residue check.
             if res not in ACCEPTED_RES_ONE:
                 raise ValueError(f"{self.__class__.__name__}: "
-                                 f" Invalid residue name : {res}")
+                                 f" Input sequence is not valid: {res}")
             # _end_if_
+
         # _end_if_
 
         # Holds the output values.
