@@ -174,7 +174,7 @@ class CamCoil(object):
         # _end_if_
 
         # Make sure there are not empty spaces.
-        seq = str(seq).strip()
+        seq = str(seq).strip().upper()
 
         # Get the length of the sequence.
         seq_length = len(seq)
