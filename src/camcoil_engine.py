@@ -169,7 +169,8 @@ class CamCoil(object):
         # Sanity check.
         if seq is None:
             # Show a message.
-            raise ValueError(" No input sequence has been given.")
+            raise ValueError(f"{self.__class__.__name__}: "
+                             f" No input sequence has been given.")
         # _end_if_
 
         # Make sure there are not empty spaces.
