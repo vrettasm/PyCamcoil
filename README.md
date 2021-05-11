@@ -31,6 +31,10 @@ The recommended version is **Python 3.6+**. Some required packages are:
 > numpy, pathlib, pandas
 >
 
+To simplify the required packages just use:
+
+    $ pip install -r requirements.txt
+
 ## How to run
 ---
 
