@@ -293,7 +293,7 @@ class CamCoil(object):
         # Check the flag.
         if verbose:
             # Size of the chunks.
-            n = 10
+            n = 20
 
             # Split the amino-acid sequence to chucks of size 'n'.
             chunks = [seq[i:i + n] for i in range(0, seq_length, n)]
