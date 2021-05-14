@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 
 import sys
+
+# Check the current python version before running.
+if sys.version_info < (3, 6):
+    sys.exit("Error: this program requires Python 3.6 or greater.")
+# _end_if_
+
 from pathlib import Path
 from src.camcoil_engine import CamCoil
 
@@ -34,11 +40,9 @@ def main(sequence=None, pH=None, f_out=None):
         # Predict the random coil values.
         df_data = r_coil.predict(sequence, verbose=True)
     except Exception as e1:
-        # Display the message.
-        print(f" Program ended with -> {e1}")
 
         # Exit the program.
-        sys.exit(1)
+        sys.exit(f" Program ended with -> {e1}.")
     # _end_try_
 
     # Check if we want to save the results.
