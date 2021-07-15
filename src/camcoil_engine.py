@@ -336,4 +336,15 @@ class CamCoil(object):
         return f" CamCoil Id({id(self)}): pH={self._pH}"
     # _end_def_
 
+    # Auxiliary.
+    def __repr__(self):
+        """
+        Override repr operator to return a string that can
+        be evaluated.
+
+        :return: CamCoil().
+        """
+        return f"CamCoil(pH={self._pH})"
+    # _end_def_
+
 # _end_class_
