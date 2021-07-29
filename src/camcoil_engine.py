@@ -301,7 +301,7 @@ class CamCoil(object):
             # Print message:
             print(f"SEQUENCE PROCESSED (pH={self.pH}):")
 
-            # Print the sequence in chunks of 10 residues.
+            # Print the sequence in chunks of 'n=20' residues.
             for i, partial in enumerate(chunks, start=1):
                 print(f"{i:>3}: {partial}")
             # _end_for_
