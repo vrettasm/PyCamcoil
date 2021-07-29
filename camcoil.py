@@ -74,7 +74,7 @@ if __name__ == "__main__":
         # Create a parser object.
         parser = argparse.ArgumentParser(description="PyCamcoil (v0.1): "
                                                      "Generates random coil chemical shift values "
-                                                     "that are obtained by analyzing the amino acid"
+                                                     "that are obtained by analyzing the amino-acid "
                                                      "sequences in the loop regions.")
 
         # Input sequence of amino-acids (one-letter-code).
