@@ -16,12 +16,12 @@ __email__ = "michail.vrettas@gmail.com"
 
 
 # Main function.
-def main(sequence=None, pH=None, f_out=None):
+def main(sequences=None, pH=None, f_out=None):
     """
     This is the main function that is called
     to initiate the camcoil_engine prediction.
 
-    :param sequence: (string) of amino-acids.
+    :param sequences: (string) of amino-acids.
 
     :param pH: (float)  determines the specific
     random coil (reference) values that will be
@@ -34,31 +34,41 @@ def main(sequence=None, pH=None, f_out=None):
     """
 
     try:
-        # Create a CamCoil object.
+        # Create a single CamCoil object.
         r_coil = CamCoil(pH=pH)
 
-        # Predict the random coil values.
-        df_data = r_coil.predict(sequence, verbose=True)
+        # Process all the input sequences.
+        for n, seq_n in enumerate(sequences, start=1):
+
+            # Predict the random coil values.
+            df_data = r_coil.predict(seq_n, verbose=True)
+
+            # Check if we want to save the results.
+            if f_out:
+                # Make sure its a Path().
+                f_path = Path(Path(f_out) / f"Seq_{n}_Random_Coil.csv")
+
+                # Save to csv.
+                df_data.to_csv(f_path, na_rep="nan")
+
+                # Display a confirmation.
+                print(f"Data saved to: {f_path}")
+            else:
+                # Here we just display on the screen.
+                print(df_data)
+            # _end_if_
+
+            # Make separate predictions more visible.
+            print("-END OF PREDICTION-", end="\n")
+
+        # _end_for_
+
     except Exception as e1:
 
         # Exit the program.
         sys.exit(f" Program ended with -> {e1}.")
+
     # _end_try_
-
-    # Check if we want to save the results.
-    if f_out:
-        # Make sure its a Path().
-        f_path = Path(Path(f_out) / "random_coil.csv")
-
-        # Save to csv.
-        df_data.to_csv(f_path, na_rep='nan')
-
-        # Display a confirmation.
-        print(f"Data saved to: {f_path}")
-    else:
-        # Here we just display on the screen.
-        print(df_data)
-    # _end_if_
 
 # _end_main_
 
@@ -78,18 +88,17 @@ if __name__ == "__main__":
                                                      "sequences in the loop regions.")
 
         # Input sequence of amino-acids (one-letter-code).
-        parser.add_argument("-s", "--seq", type=str, required=True,
-                            help="Input sequence (string) of amino-acids "
-                                 "(REQUIRED)")
+        parser.add_argument("-s", "--seq", type=str, nargs='+', required=True,
+                            help="Input sequence(s) of amino-acids (REQUIRED)")
         # Input pH value.
         parser.add_argument("--pH", type=float, default=7.0,
                             help="pH value of reference chemical shifts "
                                  "[default=7.0]")
 
         # Output path to save the random coil chemical shifts.
-        parser.add_argument("--out", type=str, default=None,
+        parser.add_argument("-o", "--out", type=str, default=None,
                             help="Output 'path' to save the predicted values. "
-                                 "The default file name is 'random_coil.csv' ")
+                                 "The default file name is 'Seq_n_Random_Coil.csv' ")
 
         # Parse the arguments.
         args = parser.parse_args()
