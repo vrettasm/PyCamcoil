@@ -1,4 +1,4 @@
-# PyCamcoil (version 0.1)
+# PyCamcoil (version 1.0.0)
 ---
 
 ![Logo](./Logo_camcoil.png)
@@ -38,7 +38,6 @@ To simplify the required packages just use:
     $ pip install -r requirements.txt
 
 ## How to run
----
 
 To execute the program, first navigate to the main directory of the project
 (i.e. where the camcoil.py is located), and then run the following command:
@@ -67,6 +66,17 @@ SEQUENCE PROCESSED (pH=6.1):
 11  12    Q  55.71748  29.58952  176.10200  8.20326  4.35074  120.44640
 ```
 
+   > **Hint**: If you want to run the program on multiple sequences you
+   > can include one after the other, with a space ' ' between them as
+   > follows:
+   >  
+   > $ ./camcoil.py -s TESTSEQA TESTSEQC TESTSEQD ...
+
+This will run PyCamcoil on all the sequences and will display the results
+for each one separately.
+
+---
+
 To see the full help information, type:
 
     $ ./camcoil.py --help
@@ -82,7 +92,6 @@ is equivalent to:
     2. $ ./camcoil.py -s TESTAMINOSEQ
 
 ## Performance
----
 
 The code can also be called independently in any other Python program
 by importing the main module as:
@@ -121,7 +130,6 @@ above) averages around '0.5' sec per '100' residue amino-acid chain:
     505 ms ± 35.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 
 ## References
----
 
 The work is described in detail at:
 
@@ -132,7 +140,6 @@ The work is described in detail at:
     Chemical Society (JACS), 131 (45), 16332 - 16333.
 
 ### Contact
----
 
 For any questions/comments (*regarding the code*) please contact me at:
 vrettasm@gmail.com

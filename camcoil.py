@@ -11,8 +11,9 @@ from pathlib import Path
 from src.camcoil_engine import CamCoil
 
 # INFO:
+__version__ = "1.0.0"
 __author__ = "Michail Vrettas, PhD"
-__email__ = "michail.vrettas@gmail.com"
+__email__ = "vrettasm@duck.com"
 
 
 # Main function.
@@ -82,7 +83,7 @@ if __name__ == "__main__":
         import argparse
 
         # Create a parser object.
-        parser = argparse.ArgumentParser(description="PyCamcoil (v0.1): "
+        parser = argparse.ArgumentParser(description=f"PyCamcoil ({__version__}): "
                                                      "Generates random coil chemical shift values "
                                                      "that are obtained by analyzing the amino-acid "
                                                      "sequences in the loop regions.")
