@@ -1,5 +1,4 @@
 # PyCamcoil (version 1.0.0)
----
 
 ![Logo](./Logo_camcoil.png)
 
@@ -12,7 +11,6 @@ There might be updates in the future, but this first version is now fully operat
 M. Vrettas, PhD.
 
 ## Installation
----
 
 There are two options to install the software.
 
