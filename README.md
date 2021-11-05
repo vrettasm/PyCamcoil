@@ -67,8 +67,8 @@ SEQUENCE PROCESSED (pH=6.1):
 ```
 
    > **Hint**: If you want to run the program on multiple sequences you
-   > can include one after the other, with a space ' ' between them as
-   > follows:
+   > can include them one after the other, with a space ' ' between them
+   > as follows:
    >  
    > $ ./camcoil.py -s TESTSEQA TESTSEQC TESTSEQD ...
 
