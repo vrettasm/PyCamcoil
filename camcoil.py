@@ -83,8 +83,7 @@ if __name__ == "__main__":
         import argparse
 
         # Create a parser object.
-        parser = argparse.ArgumentParser(description=f"PyCamcoil ({__version__}): "
-                                                     "Generates random coil chemical shift values "
+        parser = argparse.ArgumentParser(description="Generates random coil chemical shift values "
                                                      "that are obtained by analyzing the amino-acid "
                                                      "sequences in the loop regions.")
 
@@ -99,7 +98,12 @@ if __name__ == "__main__":
         # Output path to save the random coil chemical shifts.
         parser.add_argument("-o", "--out", type=str, default=None,
                             help="Output 'path' to save the predicted values. "
-                                 "The default file name is 'Seq_n_Random_Coil.csv' ")
+                                 "The default file name is 'Seq_{n}_Random_Coil.csv' ")
+
+        # Shows the version of the program.
+        parser.add_argument("--version", action="version",
+                            version=f"PyCamcoil (c), version: {__version__}",
+                            help="Print version information and exit.")
 
         # Parse the arguments.
         args = parser.parse_args()
