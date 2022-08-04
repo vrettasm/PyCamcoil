@@ -119,7 +119,7 @@ weights_LFP = {"L2": ChemShifts(0.54, 0.28, 0.64, 0.54, 0.06, 0.32),
                "R2": ChemShifts(0.42, 0.28, 0.74, 0.58, 0.08, 0.26)}
 
 # Auxiliary function.
-def md5checksum(file_name: str):
+def md5_checksum(file_name: str):
     """
     Compute the MD5 checksum of an input file.
 
@@ -131,16 +131,19 @@ def md5checksum(file_name: str):
     # Create an MD5 object.
     md5 = hashlib.md5()
 
-    # Handle content in binary form.
+    # Handle the contents in binary form.
     with open(file_name, mode="rb") as f:
 
-        # Read the file.
+        # Read the file in bytes.
         for buffer in iter(partial(f.read, 128), b''):
+
+            # Update the MD5.
             md5.update(buffer)
         # _end_for_
 
     # _end_with_
 
+    # Return the hex-digest.
     return md5.hexdigest()
 # _end_def_
 
