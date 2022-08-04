@@ -19,11 +19,12 @@ NOTE:
 
 """
 
+import warnings
 from pathlib import Path
 from pandas import read_csv, DataFrame
 
-from .camcoil_properties import (TARGET_ATOMS, ACCEPTED_RES_ONE,
-                                 pH2_prop, pH7_prop, weights)
+from .camcoil_properties import (TARGET_ATOMS, MD5_HASH_CODES, ACCEPTED_RES_ONE,
+                                 pH2_prop, pH7_prop, weights, md5_checksum)
 
 
 class CamCoil(object):
@@ -88,6 +89,16 @@ class CamCoil(object):
             if not f_path.is_file():
                 raise FileNotFoundError(f"{self.__class__.__name__} : "
                                         f"File {f_path} doesn't exist.")
+            # _end_if_
+
+            # Check the checksum of the input file.
+            if md5_checksum(f_path) != MD5_HASH_CODES[f_name]:
+
+                # Create the warning message.
+                msg = f"The MD5 checksum of {f_name} has changed."
+
+                # Show the warning.
+                warnings.warn(msg, UserWarning)
             # _end_if_
 
             # N.B.: We have to set the 'keep_default_na=False', because
