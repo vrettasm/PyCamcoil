@@ -8,6 +8,8 @@ Properties for the CamCoil implementation. These include:
     5. weights_LFP
 
 """
+import hashlib
+from functools import partial
 from numpy import nan as np_nan
 from collections import namedtuple
 
@@ -20,6 +22,12 @@ TARGET_ATOMS = ('N', 'C', 'CA', 'CB', 'H', 'HA')
 # Module level declaration.
 # Make sure the order of the fields DOES NOT CHANGE!
 ChemShifts = namedtuple("ChemShifts", TARGET_ATOMS)
+
+# MD5 Hash-codes of the files.
+MD5_HASH_CODES = {"corr_L1": "88f13da5b38fb7385d5c23a5de753dc2",
+                  "corr_L2": "1b12393292808938f1744b031352b3e6",
+                  "corr_R1": "10ab22b9852d4319f61f9f9960c9a5bb",
+                  "corr_R2": "f2dfaa4e62e9a24582872691458bae48"}
 
 # Add documentation for the fields.
 __pdoc__["ChemShifts.N"] = "Random coil chemical shift value for 'N'."
@@ -109,5 +117,31 @@ weights_LFP = {"L2": ChemShifts(0.54, 0.28, 0.64, 0.54, 0.06, 0.32),
                "L1": ChemShifts(0.66, 0.32, 0.78, 0.88, 0.16, 0.40),
                "R1": ChemShifts(0.58, 0.38, 0.92, 0.88, 0.16, 0.44),
                "R2": ChemShifts(0.42, 0.28, 0.74, 0.58, 0.08, 0.26)}
+
+# Auxiliary function.
+def md5checksum(file_name: str):
+    """
+    Compute the MD5 checksum of an input file.
+
+    :param file_name: String name of the text file.
+
+    :return: the md5 hex-digest.
+    """
+
+    # Create an MD5 object.
+    md5 = hashlib.md5()
+
+    # Handle content in binary form.
+    with open(file_name, mode="rb") as f:
+
+        # Read the file.
+        for buffer in iter(partial(f.read, 128), b''):
+            md5.update(buffer)
+        # _end_for_
+
+    # _end_with_
+
+    return md5.hexdigest()
+# _end_def_
 
 # _end_module_
