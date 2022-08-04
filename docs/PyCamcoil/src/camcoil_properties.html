@@ -43,6 +43,8 @@ Properties for the CamCoil implementation. These include:
     5. weights_LFP
 
 &#34;&#34;&#34;
+import hashlib
+from functools import partial
 from numpy import nan as np_nan
 from collections import namedtuple
 
@@ -55,6 +57,12 @@ TARGET_ATOMS = (&#39;N&#39;, &#39;C&#39;, &#39;CA&#39;, &#39;CB&#39;, &#39;H&#39
 # Module level declaration.
 # Make sure the order of the fields DOES NOT CHANGE!
 ChemShifts = namedtuple(&#34;ChemShifts&#34;, TARGET_ATOMS)
+
+# MD5 Hash-codes of the files.
+MD5_HASH_CODES = {&#34;corr_L1&#34;: &#34;88f13da5b38fb7385d5c23a5de753dc2&#34;,
+                  &#34;corr_L2&#34;: &#34;1b12393292808938f1744b031352b3e6&#34;,
+                  &#34;corr_R1&#34;: &#34;10ab22b9852d4319f61f9f9960c9a5bb&#34;,
+                  &#34;corr_R2&#34;: &#34;f2dfaa4e62e9a24582872691458bae48&#34;}
 
 # Add documentation for the fields.
 __pdoc__[&#34;ChemShifts.N&#34;] = &#34;Random coil chemical shift value for &#39;N&#39;.&#34;
@@ -145,6 +153,35 @@ weights_LFP = {&#34;L2&#34;: ChemShifts(0.54, 0.28, 0.64, 0.54, 0.06, 0.32),
                &#34;R1&#34;: ChemShifts(0.58, 0.38, 0.92, 0.88, 0.16, 0.44),
                &#34;R2&#34;: ChemShifts(0.42, 0.28, 0.74, 0.58, 0.08, 0.26)}
 
+# Auxiliary function.
+def md5_checksum(file_name: str):
+    &#34;&#34;&#34;
+    Compute the MD5 checksum of an input file.
+
+    :param file_name: String name of the text file.
+
+    :return: the md5 hex-digest.
+    &#34;&#34;&#34;
+
+    # Create an MD5 object.
+    md5 = hashlib.md5()
+
+    # Handle the contents in binary form.
+    with open(file_name, mode=&#34;rb&#34;) as f:
+
+        # Read the file in bytes.
+        for buffer in iter(partial(f.read, 128), b&#39;&#39;):
+
+            # Update the MD5.
+            md5.update(buffer)
+        # _end_for_
+
+    # _end_with_
+
+    # Return the hex-digest.
+    return md5.hexdigest()
+# _end_def_
+
 # _end_module_</code></pre>
 </details>
 </section>
@@ -153,6 +190,48 @@ weights_LFP = {&#34;L2&#34;: ChemShifts(0.54, 0.28, 0.64, 0.54, 0.06, 0.32),
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="PyCamcoil.src.camcoil_properties.md5_checksum"><code class="name flex">
+<span>def <span class="ident">md5_checksum</span></span>(<span>file_name: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the MD5 checksum of an input file.</p>
+<p>:param file_name: String name of the text file.</p>
+<p>:return: the md5 hex-digest.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def md5_checksum(file_name: str):
+    &#34;&#34;&#34;
+    Compute the MD5 checksum of an input file.
+
+    :param file_name: String name of the text file.
+
+    :return: the md5 hex-digest.
+    &#34;&#34;&#34;
+
+    # Create an MD5 object.
+    md5 = hashlib.md5()
+
+    # Handle the contents in binary form.
+    with open(file_name, mode=&#34;rb&#34;) as f:
+
+        # Read the file in bytes.
+        for buffer in iter(partial(f.read, 128), b&#39;&#39;):
+
+            # Update the MD5.
+            md5.update(buffer)
+        # _end_for_
+
+    # _end_with_
+
+    # Return the hex-digest.
+    return md5.hexdigest()</code></pre>
+</details>
+</dd>
+</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
@@ -207,6 +286,11 @@ weights_LFP = {&#34;L2&#34;: ChemShifts(0.54, 0.28, 0.64, 0.54, 0.06, 0.32),
 <li><h3>Super-module</h3>
 <ul>
 <li><code><a title="PyCamcoil.src" href="index.html">PyCamcoil.src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="PyCamcoil.src.camcoil_properties.md5_checksum" href="#PyCamcoil.src.camcoil_properties.md5_checksum">md5_checksum</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>

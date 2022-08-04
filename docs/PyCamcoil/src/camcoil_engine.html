@@ -65,11 +65,12 @@ NOTE:
 
 &#34;&#34;&#34;
 
+import warnings
 from pathlib import Path
 from pandas import read_csv, DataFrame
 
-from .camcoil_properties import (TARGET_ATOMS, ACCEPTED_RES_ONE,
-                                 pH2_prop, pH7_prop, weights)
+from .camcoil_properties import (TARGET_ATOMS, MD5_HASH_CODES, ACCEPTED_RES_ONE,
+                                 pH2_prop, pH7_prop, weights, md5_checksum)
 
 
 class CamCoil(object):
@@ -134,6 +135,16 @@ class CamCoil(object):
             if not f_path.is_file():
                 raise FileNotFoundError(f&#34;{self.__class__.__name__} : &#34;
                                         f&#34;File {f_path} doesn&#39;t exist.&#34;)
+            # _end_if_
+
+            # Check the checksum of the input file.
+            if md5_checksum(f_path) != MD5_HASH_CODES[f_name]:
+
+                # Create the warning message.
+                msg = f&#34;The MD5 checksum of {f_name} has changed.&#34;
+
+                # Show the warning.
+                warnings.warn(msg, UserWarning)
             # _end_if_
 
             # N.B.: We have to set the &#39;keep_default_na=False&#39;, because
@@ -219,7 +230,7 @@ class CamCoil(object):
                              f&#34; No input sequence has been given.&#34;)
         # _end_if_
 
-        # Make sure there are not empty spaces.
+        # Make sure there aren&#39;t empty spaces.
         seq = str(seq).strip().upper()
 
         # Get the length of the sequence.
@@ -245,7 +256,7 @@ class CamCoil(object):
         # Holds the output values.
         output = []
 
-        # Localize the append.
+        # Localize the &#39;append&#39;.
         output_append = output.append
 
         # Compute the random coil values.
@@ -339,15 +350,15 @@ class CamCoil(object):
         # Check the flag.
         if verbose:
             # Size of the chunks.
-            n = 10
+            n = 20
 
-            # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+            # Split the amino-acid sequence to chunk of size &#39;n&#39;.
             chunks = [seq[i:i + n] for i in range(0, seq_length, n)]
 
             # Print message:
             print(f&#34;SEQUENCE PROCESSED (pH={self.pH}):&#34;)
 
-            # Print the sequence in chunks of 10 residues.
+            # Print the sequence in chunks of &#39;n=20&#39; residues.
             for i, partial in enumerate(chunks, start=1):
                 print(f&#34;{i:&gt;3}: {partial}&#34;)
             # _end_for_
@@ -380,6 +391,17 @@ class CamCoil(object):
         &#34;&#34;&#34;
         # Return the f-string.
         return f&#34; CamCoil Id({id(self)}): pH={self._pH}&#34;
+    # _end_def_
+
+    # Auxiliary.
+    def __repr__(self):
+        &#34;&#34;&#34;
+        Override repr operator to return a string that can
+        be evaluated.
+
+        :return: CamCoil().
+        &#34;&#34;&#34;
+        return f&#34;CamCoil(pH={self._pH})&#34;
     # _end_def_
 
 # _end_class_</code></pre>
@@ -475,6 +497,16 @@ set automatically to one of these two in the code.</p>
                                         f&#34;File {f_path} doesn&#39;t exist.&#34;)
             # _end_if_
 
+            # Check the checksum of the input file.
+            if md5_checksum(f_path) != MD5_HASH_CODES[f_name]:
+
+                # Create the warning message.
+                msg = f&#34;The MD5 checksum of {f_name} has changed.&#34;
+
+                # Show the warning.
+                warnings.warn(msg, UserWarning)
+            # _end_if_
+
             # N.B.: We have to set the &#39;keep_default_na=False&#39;, because
             # the combination of residues &#39;N&#39; + &#39;A&#39; is interpreted here
             # by default as &#39;NaN&#39;, and that causes the indexing to fail
@@ -558,7 +590,7 @@ set automatically to one of these two in the code.</p>
                              f&#34; No input sequence has been given.&#34;)
         # _end_if_
 
-        # Make sure there are not empty spaces.
+        # Make sure there aren&#39;t empty spaces.
         seq = str(seq).strip().upper()
 
         # Get the length of the sequence.
@@ -584,7 +616,7 @@ set automatically to one of these two in the code.</p>
         # Holds the output values.
         output = []
 
-        # Localize the append.
+        # Localize the &#39;append&#39;.
         output_append = output.append
 
         # Compute the random coil values.
@@ -678,15 +710,15 @@ set automatically to one of these two in the code.</p>
         # Check the flag.
         if verbose:
             # Size of the chunks.
-            n = 10
+            n = 20
 
-            # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+            # Split the amino-acid sequence to chunk of size &#39;n&#39;.
             chunks = [seq[i:i + n] for i in range(0, seq_length, n)]
 
             # Print message:
             print(f&#34;SEQUENCE PROCESSED (pH={self.pH}):&#34;)
 
-            # Print the sequence in chunks of 10 residues.
+            # Print the sequence in chunks of &#39;n=20&#39; residues.
             for i, partial in enumerate(chunks, start=1):
                 print(f&#34;{i:&gt;3}: {partial}&#34;)
             # _end_for_
@@ -718,7 +750,18 @@ set automatically to one of these two in the code.</p>
         :return: a string representation of a CamCoil object.
         &#34;&#34;&#34;
         # Return the f-string.
-        return f&#34; CamCoil Id({id(self)}): pH={self._pH}&#34;</code></pre>
+        return f&#34; CamCoil Id({id(self)}): pH={self._pH}&#34;
+    # _end_def_
+
+    # Auxiliary.
+    def __repr__(self):
+        &#34;&#34;&#34;
+        Override repr operator to return a string that can
+        be evaluated.
+
+        :return: CamCoil().
+        &#34;&#34;&#34;
+        return f&#34;CamCoil(pH={self._pH})&#34;</code></pre>
 </details>
 <h3>Instance variables</h3>
 <dl>
@@ -781,7 +824,7 @@ it will print more information on the screen.</p>
                          f&#34; No input sequence has been given.&#34;)
     # _end_if_
 
-    # Make sure there are not empty spaces.
+    # Make sure there aren&#39;t empty spaces.
     seq = str(seq).strip().upper()
 
     # Get the length of the sequence.
@@ -807,7 +850,7 @@ it will print more information on the screen.</p>
     # Holds the output values.
     output = []
 
-    # Localize the append.
+    # Localize the &#39;append&#39;.
     output_append = output.append
 
     # Compute the random coil values.
@@ -901,15 +944,15 @@ it will print more information on the screen.</p>
     # Check the flag.
     if verbose:
         # Size of the chunks.
-        n = 10
+        n = 20
 
-        # Split the amino-acid sequence to chucks of size &#39;n&#39;.
+        # Split the amino-acid sequence to chunk of size &#39;n&#39;.
         chunks = [seq[i:i + n] for i in range(0, seq_length, n)]
 
         # Print message:
         print(f&#34;SEQUENCE PROCESSED (pH={self.pH}):&#34;)
 
-        # Print the sequence in chunks of 10 residues.
+        # Print the sequence in chunks of &#39;n=20&#39; residues.
         for i, partial in enumerate(chunks, start=1):
             print(f&#34;{i:&gt;3}: {partial}&#34;)
         # _end_for_
